@@ -1,0 +1,194 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+        integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesgeet"
+        href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
+</head>
+
+<div class="containerside">
+
+    <div style="border-radius: 15px;">
+
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div>
+
+        <body class="profile-page">
+
+            <app-header></app-header>
+
+
+            <div class="d-flex flex-column justify-content-center w-100 h-50">
+
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 style="text-align: center;     margin-bottom: 170px;
+                        width: 100%; font-size: 80px; color: white;">APROBACIÓN DE PERMISOS</h1>
+                </div>
+            </div>
+            <div class="main main-raised">
+                <div class="profile-content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 ml-auto mr-auto">
+                                <div class="profile">
+                                    <div class="containerregre">
+                                        <div></div>
+                                        <div><button class="cta" routerLink="/gestion">
+                                                <span class="hover-underline-animation">Menu Principal</span>
+                                                <svg viewBox="0 0 46 16" height="10" width="30"
+                                                    xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                                                    <path transform="translate(30)"
+                                                        d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                                                        data-name="Path 10" id="Path_10"></path>
+                                                </svg>
+                                            </button></div>
+                                    </div>
+                                </div>
+                                <div class="containertabla" style="width: 100%;">
+                                    <div>
+                                        <div class="searchBox">
+                                            <input class="searchInput" type="text" name=""
+                                                placeholder="Buscar por cédula"
+                                                title="Buscar por cedula, nombre, apellido, telefono"
+                                                [(ngModel)]="searchString" (input)="searchPermisos(searchString, 1)">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    height: 100%;">
+                                        <button class="Btn3" (click)="getPermisos()">Refrescar
+                                            <svg class="svg" viewBox="0 0 20 20" width="40px" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M20 18L14 18M17 15V21M4 21C4 17.134 7.13401 14 11 14C11.695 14 12.3663 14.1013 13 14.2899M15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z"
+                                                    stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="width: 100%; margin-top: 50px;">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="job-table">
+                                            <thead className="theadTab">
+                                                <tr class="text-center" style="background-color: aquamarine;">
+                                                    <th class="tipo" scope="col">N° DE PERMISO</th>
+                                                    <th class="tipo" scope="col">CÉDULA DEL EMISOR</th>
+                                                    <th class="tipo" scope="col">TIPO DE PERMISO</th>
+                                                    <th class="tipo" scope="col">MOTIVO DEL PERMISO</th>
+                                                    <th class="tipo" scope="col">FECHA DE EMISIÓN</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">INICIO
+                                                        DEL PERMISO</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">FIN
+                                                        DEL PERMISO</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">HORAS
+                                                        DE INICIO</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">HORAS
+                                                        FIN</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">
+                                                        OBSERVACIÓN</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">
+                                                        EMISOR DEL PERMISO</th>
+                                                    <th class="tipo" scope="col" *ngIf="rol === 'Jefe de Unidad'">CÉDULA
+                                                        DEL SOLICITANTE
+                                                    </th>
+                                                    <th class="tipo" scope="col">PREVISUALIZACIÓN DE LA SOLICITUD</th>
+                                                    <th class="tipo" scope="col">APROBAR</th>
+                                                    <th class="tipo" scope="col">RECHAZAR</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center tableBody">
+                                                <tr key={key} *ngFor="let per of listaPermisos">
+                                                    <td class="tdTbl">{{per.permId}}</td>
+                                                    <td class="tdTbl">{{per.usuId.usuPerId.perCedula}}</td>
+                                                    <td class="tdTbl">{{per.tiPeId.tiPeNombre}}</td>
+                                                    <td class="tdTbl">{{per.motId.motNombre}}</td>
+                                                    <td class="tdTbl">{{per.permFechaEmision | date:'dd-MM-yyyy'}}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{ per.permFechaInicio ? (per.permFechaInicio
+                                                        |date:'dd-MM-yyyy') :
+                                                        'N/A' }}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{ per.permFechaFin ? (per.permFechaFin | date:'dd-MM-yyyy') :
+                                                        'N/A' }}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{ per.permHorasInicio ? getFormattedTime(per.permHorasInicio)
+                                                        :'N/A' }}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{ per.permHorasFin ? getFormattedTime(per.permHorasFin) :
+                                                        'N/A'}}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{per.permObservacion}}</td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{per.usuId.usuPerId.perNombre}}
+                                                        {{per.usuId.usuPerId.perApellido}}
+                                                    </td>
+                                                    <td class="tdTbl" *ngIf="rol === 'Jefe de Unidad'">
+                                                        {{per.usuId.usuPerId.perCedula}}</td>
+                                                    <td class="tdTbl">
+                                                        <ng-container *ngIf="per.permDocumento; else noInfo">
+                                                            <button role="button" class="button-name"
+                                                                (click)="previewBase64PDF(per.permDocumento, 'SolicitudPermiso_'+
+                                                                per.usuId.usuPerId.perApellido+'_'+per.usuId.usuPerId.perCedula)">
+                                                                <i class="fa fa-regular fa-eye fa-2x"></i>
+                                                            </button>
+                                                        </ng-container>
+                                                        <ng-template #noInfo>
+                                                            Sin Solicitud Habilitante
+                                                        </ng-template>
+                                                    </td>
+                                                    <td class="tdTbl">
+                                                        <button *ngIf="rol === 'Administrador'" role="button"
+                                                            class="button-name3"
+                                                            (click)="updateEstadoPermisos(per.permId, 1)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+                                                                height="1.40em">
+                                                                <path d="M27 55L6 33 9 29 26 41 55 12 59 16z" />
+                                                            </svg>
+                                                        </button>
+
+                                                        <button *ngIf="rol === 'Jefe de Unidad'" role="button"
+                                                            class="button-name3"
+                                                            (click)="updateEstadoPermisos(per.permId, 2)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"
+                                                                height="1.40em">
+                                                                <path d="M27 55L6 33 9 29 26 41 55 12 59 16z" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                    <td class="tdTbl">
+                                                        <button role="button" class="button-name2"
+                                                            (click)="updateEstadoPermisos(per.permId,4)">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                                                viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                                <path
+                                                                    d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 20px;"></div>
+            </div>
+        </body>
+    </div>
+</div>

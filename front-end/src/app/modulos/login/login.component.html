@@ -1,0 +1,32 @@
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PÁGINA DE LOGEO</title>
+</head>
+
+<body>
+    <div style="width: 100%; height: 100%;">
+
+        <section class="layout">
+            <div class="form">
+                <div class="Formulario" style="width: 100%; height: 100%; text-align: center;">
+                    <div class="container" id="container" style="margin-left: auto; margin-right: auto;">
+                        <div class="form-container sign-in-container">
+                            <form action="#">
+                                <img style="display: inline-block; margin: 0 auto;" src="assets/img/1.png" alt=""
+                                    width="70%">
+                                <h1 style="margin-bottom: 20px;">INICIAR SESIÓN</h1>
+                                <input type="email" placeholder="Ingrese su nombre de usuario" name="usuNombreUsuario"
+                                    [(ngModel)]="loginRequest.usuNombreUsuario" />
+                                <input type="password" placeholder="Ingrese su contraseña" name="usuContrasena"
+                                    [(ngModel)]="loginRequest.usuContrasena" />
+                                <button style="margin-top: 20px;" (click)="logIn()">Iniciar Sesión</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
